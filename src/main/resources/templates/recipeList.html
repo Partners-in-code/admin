@@ -20,12 +20,13 @@
 				</thead>
 				<tbody>
 					<tr data-th-each="recipe : ${recipeList}">
-<!-- 						<td><input hidden="hidden" name="id" th:value="${recipe.id}" /></td> -->
-						<td th:text="${recipe.name}"></td>
+						<!-- 						<td><input hidden="hidden" name="id" th:value="${recipe.id}" /></td> -->
+						<td><a th:href="@{/recipe/recipeInfo(id=${recipe.id})}"><span
+								th:text="${recipe.name}"></span></a></td>
 						<td th:text="${recipe.timp_preparare}"></td>
 						<td th:text="${recipe.ingrediente}"></td>
-						<td th:text="${recipe.mod_de_preparare}"></td>
-<!-- 						<td>delete</td> -->
+						<td th:utext="${recipe.mod_de_preparare}"></td>
+						<!-- 						<td>delete</td> -->
 					</tr>
 				</tbody>
 			</table>
@@ -34,5 +35,17 @@
 	</div>
 
 	<div th:replace="common/header :: body-bottom-scripts"></div>
+	<script>
+		$(document).ready(
+				function() {
+					$("#recipeListTable").DataTable(
+							{
+								"lengthMenu" : [ [ 1, 2, 5, 10, 15, 20, -1 ],
+										[ 1, 2, 5, 10, 15, 20, "All" ] ],
+								"ordering" : false,
+								stateSave : true
+							});
+				});
+	</script>
 </body>
 </html>

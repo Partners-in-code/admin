@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+<head th:replace="common/header :: common-header" />
+
+<body>
+	<div th:replace="common/header :: navbar"></div>
+	<div class="container">
+		<div class="row">
+
+			<form class="form-horizontal" th:action="@{/recipe/updateRecipe}"
+				method="post" enctype="multipart/form-data">
+				<fieldset>
+					<legend class="center-block">
+						Update Recipe Information<span style="font-size: small"> *
+							is a required field</span>
+					</legend>
+
+					<input hidden="hidden" name="id" th:value=${recipe.id} />
+					<!-- name -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="name">* Name</label>
+
+						<div class="col-md-8">
+							<input type="text" name="name" class="form-control" id="name"
+								th:value="${recipe.name}" required="required" placeholder="..." />
+							<span class="help-block">Name of the recipe</span>
+						</div>
+					</div>
+
+					<!-- timp_preparare -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="timp_preparare">*
+							Timp de preparare</label>
+
+						<div class="col-md-8">
+							<input type="text" name="timp_preparare" class="form-control"
+								id="timp_preparare" th:value="${recipe.timp_preparare}"
+								required="required" placeholder="..." /> <span
+								class="help-block">Timp de preparare al retetei</span>
+						</div>
+					</div>
+
+					<!-- type -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="ingrediente">*
+							Ingrediente</label>
+						<div class="col-md-8">
+							<input type="text" name="ingrediente" class="form-control"
+								id="ingrediente" th:value="${recipe.ingrediente}"
+								required="required" placeholder="..." /> <span
+								class="help-block">Ingredientele retetei</span>
+						</div>
+					</div>
+
+					<!-- mod_de_preparare -->
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="mod_de_preparare">*
+							Mod de preparare</label>
+						<div class="col-md-8">
+							<textarea name="mod_de_preparare" rows="5" class="form-control"
+								id="mod_de_preparare" th:value="${recipe.mod_de_preparare}" th:text="${recipe.mod_de_preparare}"
+								required="required" placeholder="Description" /> <span
+								class="help-block">Mod de preparare al retetei</span>
+						</div>
+					</div>
+					
+					<!-- upload image -->
+					<div class="form-group">
+						<div class="col-md-2">
+							<label for="recipeImage">Upload recipe image</label>
+						</div>
+						<div class="col-md-8">
+							<input id="recipeImage" type="file" name="recipeImage"
+								th:value="${recipe.recipeImage}" />
+						</div>
+					</div>
+
+					<div class="form-group">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<button type="submit" class="btn btn-success">Update
+								Recipe</button>
+							<a class="btn btn-danger"
+								th:href="@{/recipe/recipeInfo(id=${recipe.id})}">Cancel</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	<div th:replace="common/header :: body-bottom-scripts"></div>
+</body>
+</html>

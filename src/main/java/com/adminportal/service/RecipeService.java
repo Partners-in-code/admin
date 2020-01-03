@@ -7,5 +7,5 @@ import com.adminportal.domain.Recipe;
 public interface RecipeService {
 	Recipe save(Recipe recipe);
 	List<Recipe> findAll();
-	
+	Recipe findOne(Long id);
 }

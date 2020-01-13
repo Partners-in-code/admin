@@ -10,17 +10,23 @@ import com.adminportal.repository.RecipeRepository;
 import com.adminportal.service.RecipeService;
 
 @Service
-public class RecipeServiceImpl implements RecipeService{
+public class RecipeServiceImpl implements RecipeService {
 	@Autowired
 	private RecipeRepository recipeRepository;
-	
+
 	public Recipe save(Recipe recipe) {
 		return recipeRepository.save(recipe);
 	}
-	public List<Recipe> findAll(){
+
+	public List<Recipe> findAll() {
 		return (List<Recipe>) recipeRepository.findAll();
 	}
+
 	public Recipe findOne(Long id) {
 		return recipeRepository.findById(id).orElse(null);
+	}
+
+	public void removeOne(Long id) {
+		recipeRepository.deleteById(id);
 	}
 }

@@ -59,29 +59,31 @@ public class RecipeController {
 	public String recipeInfo(@RequestParam("id") Long id, Model model) {
 		Recipe recipe = recipeService.findOne(id);
 		model.addAttribute("recipe", recipe);
-		
+
 		return "recipeInfo";
 	}
+
 	@RequestMapping("/updateRecipe")
 	public String updateRecipe(@RequestParam("id") Long id, Model model) {
 		Recipe recipe = recipeService.findOne(id);
 		model.addAttribute("recipe", recipe);
-		
+
 		return "updateRecipe";
 	}
-	@RequestMapping(value="/updateRecipe", method=RequestMethod.POST)
+
+	@RequestMapping(value = "/updateRecipe", method = RequestMethod.POST)
 	public String updateRecipePost(@ModelAttribute("recipe") Recipe recipe, HttpServletRequest request) {
 		recipeService.save(recipe);
-		
+
 		MultipartFile recipeImage = recipe.getRecipeImage();
-		
-		if(!recipeImage.isEmpty()) {
+
+		if (!recipeImage.isEmpty()) {
 			try {
 				byte[] bytes = recipeImage.getBytes();
 				String name = recipe.getId() + ".png";
-				
-				Files.delete(Paths.get("src/main/resources/static/image/recipe/"+name));
-				
+
+				Files.delete(Paths.get("src/main/resources/static/image/recipe/" + name));
+
 				BufferedOutputStream stream = new BufferedOutputStream(
 						new FileOutputStream(new File("src/main/resources/static/image/recipe/" + name)));
 				stream.write(bytes);
@@ -90,16 +92,26 @@ public class RecipeController {
 				e.printStackTrace();
 			}
 		}
-		
-		return "redirect:/recipe/recipeInfo?id="+recipe.getId();
+
+		return "redirect:/recipe/recipeInfo?id=" + recipe.getId();
 	}
+
 	@RequestMapping("/recipeList")
 	public String recipeList(Model model) {
 		List<Recipe> recipeList = recipeService.findAll();
-		model.addAttribute("recipeList",recipeList);
-		
+		model.addAttribute("recipeList", recipeList);
+
 		return "recipeList";
-		
+
+	}
+
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	public String remove(@ModelAttribute("id") String id, Model model) {
+		recipeService.removeOne(Long.parseLong(id.substring(10)));
+		List<Recipe> recipeList = recipeService.findAll();
+		model.addAttribute("recipeList", recipeList);
+
+		return "redirect:/recipe/recipeList";
 	}
 
 }

@@ -2,6 +2,7 @@ package com.adminportal.domain;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 //import java.util.List;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -41,12 +43,24 @@ public class User implements UserDetails {
 	private String phone;
 	private boolean enabled = true;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "user", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private Set<Product> product = new HashSet<>();
+
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonIgnore
 	private Set<UserRole> userRoles = new HashSet<>();
+
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+	private Favorite favorite;
+
+	public Favorite getFavorite() {
+		return favorite;
+	}
+
+	public void setFavorite(Favorite favorite) {
+		this.favorite = favorite;
+	}
 
 	public Long getId() {
 		return id_user;

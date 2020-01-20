@@ -2,11 +2,15 @@ package com.adminportal.service.impl;
 
 import java.util.Set;
 
+
+import org.springframework.transaction.annotation.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.adminportal.domain.Favorite;
 import com.adminportal.domain.User;
 import com.adminportal.domain.security.UserRole;
 import com.adminportal.repository.RoleRepository;
@@ -17,10 +21,10 @@ import com.adminportal.service.UserService;
 public class UserServiceImpl implements UserService {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
 
@@ -36,6 +40,9 @@ public class UserServiceImpl implements UserService {
 			}
 
 			user.getUserRoles().addAll(userRoles);
+			Favorite favorite = new Favorite();
+			favorite.setUser(user);
+			user.setFavorite(favorite);
 
 			localUser = userRepository.save(user);
 		}
@@ -47,6 +54,5 @@ public class UserServiceImpl implements UserService {
 	public User save(User user) {
 		return userRepository.save(user);
 	}
-
 
 }

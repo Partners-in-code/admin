@@ -1,5 +1,6 @@
 package com.adminportal.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,9 +21,10 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_product", nullable = false, updatable = false)
 	private Long id_product;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_user")
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_user")
 	private User user;
+
 	public Product() {
 		super();
 	}
@@ -35,8 +37,8 @@ public class Product {
 		this.type = type;
 	}
 
-	//private Set<Pantry> pantry = new HashSet<>();
 	private String name;
+
 	public User getUser() {
 		return user;
 	}
@@ -50,9 +52,6 @@ public class Product {
 
 	@Transient
 	private MultipartFile productImage;
-
-//	@JsonIgnore
-//	private List<Product> productToPantryItemList;
 
 	public Long getId() {
 		return id_product;
@@ -93,14 +92,5 @@ public class Product {
 	public void setProductImage(MultipartFile productImage) {
 		this.productImage = productImage;
 	}
-
-
-//	public List<productToPantryItem> getProductToPantryItemList() {
-//		return productToPantryItemList;
-//	}
-//
-//	public void setProductToPantryItemList(List<productToPantryItem> productToPantryItemList) {
-//		this.productToPantryItemList = productToPantryItemList;
-//	}
 
 }

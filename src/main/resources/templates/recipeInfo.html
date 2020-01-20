@@ -36,20 +36,20 @@
 				</div>
 			</div>
 			<div class="col-xs-7">
-				<h3 th:text="${recipe.name}"></h3>
+				<h3 th:utext="${recipe.name}"></h3>
 				<div class="row">
 					<div class="col-xs-9">
 						<p>
 							<strong>Timp de preparare: </strong><span
-								th:text="${recipe.timp_preparare}"></span>
+								th:utext="${recipe.timp_preparare}"></span>
 						</p>
 						<p>
 							<strong>Ingrediente: </strong><span
-								th:text="${recipe.ingrediente}"></span>
+								th:utext="${recipe.ingrediente}"></span>
 						</p>
 						<p>
 							<strong>Mod de preparare: </strong><span
-								th:utext="${#strings.abbreviate(recipe.mod_de_preparare, 500)}"></span>
+								th:utext="${#strings.abbreviate(recipe.mod_de_preparare, 10000)}"></span>
 						</p>
 					</div>
 				</div>

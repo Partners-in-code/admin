@@ -22,8 +22,8 @@
 						<label class="col-md-2 control-label" for="name">* Name</label>
 
 						<div class="col-md-8">
-							<input type="text" name="name" class="form-control" id="name"
-								th:value="${recipe.name}" required="required" placeholder="..." />
+							<textarea type="text" name="name" class="form-control" id="name"
+								th:value="${recipe.name}" th:text="${recipe.name}" required="required" placeholder="..." ></textarea>
 							<span class="help-block">Name of the recipe</span>
 						</div>
 					</div>
@@ -34,9 +34,9 @@
 							Timp de preparare</label>
 
 						<div class="col-md-8">
-							<input type="text" name="timp_preparare" class="form-control"
-								id="timp_preparare" th:value="${recipe.timp_preparare}"
-								required="required" placeholder="..." /> <span
+							<textarea type="text" name="timp_preparare" class="form-control"
+								id="timp_preparare" th:value="${recipe.timp_preparare}" th:text="${recipe.timp_preparare}"
+								required="required" placeholder="..." ></textarea> <span
 								class="help-block">Timp de preparare al retetei</span>
 						</div>
 					</div>
@@ -60,7 +60,7 @@
 						<div class="col-md-8">
 							<textarea name="mod_de_preparare" rows="5" class="form-control"
 								id="mod_de_preparare" th:value="${recipe.mod_de_preparare}" th:text="${recipe.mod_de_preparare}"
-								required="required" placeholder="Description" /> <span
+								required="required" placeholder="Description" ></textarea> <span
 								class="help-block">Mod de preparare al retetei</span>
 						</div>
 					</div>

@@ -26,15 +26,18 @@
 						<!-- 														<input th:id="'selected'+${recipe.id}" class="checkboxRecipe" -->
 						<!-- 														type="checkbox" /></td> -->
 						<td><a th:href="@{/recipe/recipeInfo(id=${recipe.id})}"><span
-								th:text="${recipe.name}"></span></a></td>
-						<td th:text="${recipe.timp_preparare}"></td>
-						<td th:text="${recipe.ingrediente}"></td>
+								th:utext="${recipe.name}"></span></a></td>
+						<td th:utext="${recipe.timp_preparare}"></td>
+						<td th:utext="${recipe.ingrediente}"></td>
 						<td th:utext="${recipe.mod_de_preparare}"></td>
 						<td><input hidden="hidden" name="id" th:value="${recipe.id}" />
+						<a th:href="@{/recipe/updateRecipe?id=}+${recipe.id}"><button
+									type="button" class="btn btn-success btn-xs"
+									style="width: 60px;"><span class="fa fa-wrench"></span> Edit</button></a>
 							<button th:id="'oneRecipe-'+${recipe.id}"
 								class="btn btn-danger btn-xs delete-recipe" type="submit"
 								value="delete">
-								<span class="fa fa-times"></span>Delete
+								<span class="fa fa-times"></span> Delete
 							</button></td>
 					</tr>
 				</tbody>
@@ -50,8 +53,8 @@
 				function() {
 					$("#recipeListTable").DataTable(
 							{
-								"lengthMenu" : [ [ 1, 5, 10, 15, 20, -1 ],
-										[ 1, 5, 10, 15, 20, "All" ] ],
+								"lengthMenu" : [ [ 5, 10, 15, 20, -1 ],
+										[ 5, 10, 15, 20, "All" ] ],
 								"ordering" : false,
 								stateSave : true
 							});
